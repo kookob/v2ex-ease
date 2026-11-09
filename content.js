@@ -160,15 +160,26 @@
     }
   }
 
+  // 默认放下方；下方放不下且上方更宽敞时放上方（贴着目标向上长）
+  function place(el) {
+    const r = el.getBoundingClientRect(), vh = document.documentElement.clientHeight;
+    const up = vh - r.bottom < 330 && r.top > vh - r.bottom; // 330 = 最大高度 320 + 间距
+    tip.style.maxHeight = `${Math.min(320, (up ? r.top : vh - r.bottom) - 12)}px`;
+    tip.style.top = `${(up ? r.top - tip.offsetHeight - 6 : r.bottom + 6) + scrollY}px`;
+    tip.style.left = `${Math.max(8, Math.min(r.left, innerWidth - 504)) + scrollX}px`;
+  }
+
   function show(el, render) {
     const id = ++seq;
-    tip.innerHTML = '加载中…';
+    const fill = h => {
+      if (id !== seq) return;
+      tip.innerHTML = h;
+      place(el); // 内容高度变了，重新定位
+    };
     tip.classList.toggle('v2e-dark', !!document.querySelector('#Wrapper.Night'));
     tip.hidden = false;
-    const r = el.getBoundingClientRect();
-    tip.style.top = `${r.bottom + scrollY + 6}px`;
-    tip.style.left = `${Math.max(8, Math.min(r.left, innerWidth - 504)) + scrollX}px`;
-    render().then(h => id === seq && (tip.innerHTML = h), e => id === seq && (tip.textContent = '加载失败：' + e.message));
+    fill('加载中…');
+    render().then(fill, e => fill(esc('加载失败：' + e.message)));
   }
 
   document.addEventListener('mouseover', e => {
@@ -192,6 +203,7 @@
   });
   document.addEventListener('mouseout', () => {
     clearTimeout(showTimer);
+    clearTimeout(hideTimer); // 只保留一个计时器，否则进入浮层时取消不掉早先的，浮层会被关掉
     hideTimer = setTimeout(() => { seq++; tip.hidden = true; }, 200);
   });
 })();

@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "requestDomains": ["googlesyndication.com", "doubleclick.net"],
+      "initiatorDomains": ["v2ex.com", "v2ex.co"]
+    }
+  }
+]

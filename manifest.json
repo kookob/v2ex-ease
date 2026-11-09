@@ -2,7 +2,11 @@
   "manifest_version": 3,
   "name": "V2EX Ease",
   "version": "1.0.0",
-  "description": "V2EX 增强：@用户/楼层/头像悬浮预览，base64 自动解码",
+  "description": "V2EX 增强：@用户/楼层悬浮预览、头像信息卡、base64 自动解码、屏蔽广告",
+  "permissions": ["declarativeNetRequest"],
+  "declarative_net_request": {
+    "rule_resources": [{ "id": "block_ads", "enabled": true, "path": "rules.json" }]
+  },
   "content_scripts": [
     {
       "matches": ["*://v2ex.com/*", "*://*.v2ex.com/*", "*://v2ex.co/*", "*://*.v2ex.co/*"],

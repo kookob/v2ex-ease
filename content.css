@@ -8,6 +8,7 @@ div:has(> ins.adsbygoogle) { display: none !important; }
 
 .v2e-tip {
   position: absolute; z-index: 99999; max-width: 480px; max-height: 320px; overflow: auto;
+  overscroll-behavior: contain; /* 滚到头不带动页面，免得浮层移走、鼠标脱离 */
   padding: 8px 10px; font-size: 13px; line-height: 1.6; color: #333; background: #fff;
   border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 4px 16px rgba(0, 0, 0, .15);
 }

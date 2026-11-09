@@ -23,7 +23,7 @@ jobs:
             echo "::error::tag $GITHUB_REF_NAME 与 manifest.json 版本 $VERSION 不一致"; exit 1
           fi
           echo "ZIP=v2ex-ease-$VERSION.zip" >> "$GITHUB_ENV"
-          zip "v2ex-ease-$VERSION.zip" manifest.json b64.js content.js content.css
+          zip "v2ex-ease-$VERSION.zip" manifest.json rules.json b64.js content.js content.css
 
       - name: Release
         run: gh release create "$GITHUB_REF_NAME" "$ZIP" --generate-notes
