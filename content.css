@@ -1,0 +1,19 @@
+.v2e-floor { color: #778087; border-bottom: 1px dashed currentColor; cursor: help; }
+.v2e-b64 { color: #1a7f37; border-bottom: 1px dotted currentColor; cursor: help; word-break: break-all; }
+
+img.avatar { cursor: pointer; }
+
+/* 站方插在回复列表 / 正文与附言之间的 Google 广告 */
+div:has(> ins.adsbygoogle) { display: none !important; }
+
+.v2e-tip {
+  position: absolute; z-index: 99999; max-width: 480px; max-height: 320px; overflow: auto;
+  padding: 8px 10px; font-size: 13px; line-height: 1.6; color: #333; background: #fff;
+  border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 4px 16px rgba(0, 0, 0, .15);
+}
+.v2e-tip.v2e-dark { color: #ccc; background: #22303f; border-color: #3a4a5c; }
+.v2e-tip .v2e-meta { color: #999; font-size: 12px; }
+.v2e-reply + .v2e-reply { margin-top: 6px; padding-top: 6px; border-top: 1px solid rgba(128, 128, 128, .2); }
+.v2e-text { white-space: pre-wrap; word-break: break-word; }
+.v2e-member { display: flex; gap: 10px; }
+.v2e-member img { width: 64px; height: 64px; border-radius: 4px; flex: none; }

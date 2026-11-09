@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "V2EX Ease",
+  "version": "1.0.0",
+  "description": "V2EX 增强：@用户/楼层/头像悬浮预览，base64 自动解码",
+  "content_scripts": [
+    {
+      "matches": ["*://v2ex.com/*", "*://*.v2ex.com/*", "*://v2ex.co/*", "*://*.v2ex.co/*"],
+      "js": ["b64.js", "content.js"],
+      "css": ["content.css"],
+      "run_at": "document_end"
+    }
+  ]
+}
