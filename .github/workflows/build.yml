@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Test
+        run: node b64.test.js
+
+      - name: Zip
+        run: |
+          VERSION=$(jq -r .version manifest.json)
+          if [[ "$GITHUB_REF_NAME" != "v$VERSION" ]]; then
+            echo "::error::tag $GITHUB_REF_NAME 与 manifest.json 版本 $VERSION 不一致"; exit 1
+          fi
+          echo "ZIP=v2ex-ease-$VERSION.zip" >> "$GITHUB_ENV"
+          zip "v2ex-ease-$VERSION.zip" manifest.json b64.js content.js content.css
+
+      - name: Release
+        run: gh release create "$GITHUB_REF_NAME" "$ZIP" --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}

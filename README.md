@@ -25,6 +25,10 @@ V2EX 浏览增强 Chrome 插件（Manifest V3，无依赖、无构建）。
 - 头像信息优先复用已加载的回复数据，否则调 `/api/members/show.json`，同一用户每页只查一次。
 - 公开接口限额：每 IP 每小时 600 次。
 
+## 打包发布
+
+修改 `manifest.json` 的 `version`，推送同名 tag（如 `v1.0.1`），GitHub Actions（`.github/workflows/build.yml`）会自动打包 `v2ex-ease-<版本>.zip` 并创建 Release。tag 与 manifest 版本不一致时构建失败。
+
 ## 测试
 
 ```bash
